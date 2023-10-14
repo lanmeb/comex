@@ -1,0 +1,128 @@
+<?php
+
+$livros = [
+    '978-8532530783' => [
+        'nome' => 'Harry Potter e a pedra filosofal',
+        'preco' => 32.30,
+        'qtd_estoque' => 250
+    ],
+
+    '978-8532530790' => [
+        'nome' => 'Harry Potter e a câmara secreta',
+        'preco' => 32.30,
+        'qtd_estoque' => 150
+    ],
+    '978-8532530806' => [
+        'nome' => 'Harry Potter e o prisioneiro de Azkaban',
+        'preco' => 53.51,
+        'qtd_estoque' => 200
+    ],
+
+    '978-8532530813' => [
+        'nome' => 'Harry Potter e o cálice de fogo',
+        'preco' => 39.99,
+        'qtd_estoque' => 200
+    ],
+    '978-8532530820' => [
+        'nome' => 'Harry Potter e a ordem da Fênix',
+        'preco' => 59.99,
+        'qtd_estoque' => 50
+    ],
+
+    '978-8532530837' => [
+        'nome' => 'Harry Potter e o enigma do príncipe',
+        'preco' => 42.89,
+        'qtd_estoque' => 20
+    ],
+    '978-8532530844' => [
+        'nome' => 'Harry Potter e as relíquias da morte',
+        'preco' => 55.89,
+        'qtd_estoque' => 0
+    ],
+];
+******************************************
+           Exibir produtos
+******************************************
+foreach ($livros as $isbn => $detalhes)
+{
+    echo "ISBN: " . $isbn . "\n";
+    echo "Nome: " . $detalhes['nome'] . "\n";
+    echo "Quantidade em estoque: " . $detalhes['qtd_estoque'] . "\n\n";
+}
+
+ echo "Quantidade de títulos:".count($livros). PHP_EOL;
+
+*******************************************************
+           Verificar quantidade de exemplares 
+*******************************************************
+function totalEstoque($livros) {
+    $total = 0;
+    foreach ($livros as $livro) {
+        $total += $livro['qtd_estoque'];
+    }
+    return $total;
+}
+echo "Total de livros: ". totalEstoque($livros)." exemplares."; PHP_EOL;
+
+******************************
+       Adicionando Livro
+******************************
+
+function adicionarLivro($livros, $isbn, $nome, $preco, $qtd_estoque)
+{
+    $livros[$isbn] = [
+        'nome' => $nome,
+        'preco' => $preco,
+        'qtd_estoque' => $qtd_estoque
+    ];
+    return $livros;
+}
+var_dump(($livros = adicionarLivro($livros,'978-8532530851', 'Harry Potter e a criança amaldiçoada', 45.90, 100)));
+
+***************************************
+              Remover Livro
+***************************************
+function removerLivro($isbn, &$estoque) {
+    unset($estoque[$isbn]);
+}
+(removerLivro('978-8532530783', $livros));
+
+var_dump($livros);
+
+***************************************
+         Remover exemplares
+***************************************
+
+function removerEstoque(&$livros, $isbn, $quantidade) {
+    if (isset($livros[$isbn])) {
+        $livros[$isbn]['qtd_estoque'] -= $quantidade;
+        echo "Foram removidos {$quantidade} livros de '{$livros[$isbn]['nome']}'\n";
+    }
+}
+
+removerEstoque($livros, '978-8532530783', 10);
+
+var_dump($livros);
+
+**********************************************
+ Verificando a disponibilidade de um produto
+**********************************************
+function verificarDisponibilidade($isbn, $estoque) {
+    return isset($estoque[$isbn]) ? $estoque[$isbn]['qtd_estoque'] > 0 : false;
+}
+
+$isbn = '978-8532530790';
+if (verificarDisponibilidade($isbn, $livros)) {
+    echo "O livro '{$livros[$isbn]['nome']}' está disponível em estoque. Quantidade disponível: {$livros[$isbn]['qtd_estoque']}";
+} else {
+    echo "O livro '{$livros[$isbn]['nome']}' não está disponível em estoque.";
+}
+*****************************
+     Mostrar preço
+*****************************
+foreach ($livros as $isbn => $detalhes) {
+    echo "O livro {$detalhes['nome']} custa R$ {$detalhes['preco']}" . PHP_EOL;
+ };
+//var_dump($livros);
+
+
