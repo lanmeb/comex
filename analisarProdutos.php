@@ -42,25 +42,24 @@ $livros = [
 ];
 
 
-function encontrar_maior_menor_preco($livros) {
-    // Inicializa o livro mais caro e mais barato como o primeiro livro do array
+function encontrar_maior_menor_preco($livros) 
+{
     $livro_mais_caro = current($livros);
     $livro_mais_barato = current($livros);
 
-    // Itera sobre os livros restantes no array
-    foreach ($livros as $isbn => $livro) {
-        // Se o preço do livro atual é maior que o do livro mais caro, atualiza o livro mais caro
-        if ($livro['preco'] > $livro_mais_caro['preco']) {
+        foreach ($livros as $isbn => $livro) 
+    {
+        if ($livro['preco'] > $livro_mais_caro['preco'])
+        {
             $livro_mais_caro = $livro;
         }
 
-        // Se o preço do livro atual é menor que o do livro mais barato, atualiza o livro mais barato
-        if ($livro['preco'] < $livro_mais_barato['preco']) {
+        if ($livro['preco'] < $livro_mais_barato['preco']) 
+        {
             $livro_mais_barato = $livro;
         }
     }
 
-    // Imprime o nome e o preço do livro mais caro e mais barato
     echo "O livro mais caro é '{$livro_mais_caro['nome']}' com preço de {$livro_mais_caro['preco']} ". PHP_EOL;
     echo "O livro mais barato é '{$livro_mais_barato['nome']}' com preço de {$livro_mais_barato['preco']}";
 }
