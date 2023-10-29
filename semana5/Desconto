@@ -40,3 +40,15 @@ $livros = [
         'qtd_estoque' => 0
     ],
 ];
+
+function calcular_desconto($livros, $desconto) {
+    foreach ($livros as $isbn => $livro) {
+        $preco_com_desconto = $livro['preco'] * (1 - $desconto/100);
+        echo "O livro '{$livro['nome']}' com desconto custa {$preco_com_desconto} ". PHP_EOL;
+    }
+}
+// Define a porcentagem de desconto
+$desconto = 10;
+
+calcular_desconto($livros, $desconto);
+
