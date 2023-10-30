@@ -1,6 +1,6 @@
 <?php 
 namespace Elani\Comex\semana7\Classes;
-
+use InvalidArgumentException;
 class Produto 
 {
     public function __construct(
@@ -43,12 +43,16 @@ class Produto
     }
 
 
-
-
 public function compra(int $qtd = 1)
 {
-    if ($qtd > $this->qtd_estoque) {
-        echo "A quantidade de compra é maior que a quantidade em estoque";
+    try
+    if ($qtd < 0) {
+        throw new \InvalidArgumentExceptin("A quantidade de compra não pode ser um valor negativo");
+}
+    if ($qtd > $this->qtd_estoque){
+        throw new \InvalidArgumentExceptin("A quantidade de compra é maior que a quantidade em estoque");
+    } catch (\\InvalidArgumentExceptin $erro){
+        echo $erro ->getMessage() . PHP_EOL;
         return;
 }
     $this->qtd_estoque -= $qtd;
@@ -56,12 +60,15 @@ public function compra(int $qtd = 1)
 
 public function repoe (int $qtd = 1)
 {
+    try{
+    } catch (\InvalidArgumentExceptin $erro){
+    }
     $this-> qtd_estoque += $qtd;
+}
 }
 public function ValorTotalEstoque(): int {
     return $this->qtd_estoque * $this-> preco;
 }
-
 
 }
 
