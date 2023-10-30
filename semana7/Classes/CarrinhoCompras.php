@@ -15,9 +15,16 @@ class CarrinhoDeCompras {
         $this->produtos = array();
     }
 
-}/*
+    $livros = new Produto('978-8532530851', 'Harry Potter e a criança amaldiçoada', 45.90, 100);
+    
+    $livros = adicionarTitulo($livros,'978-8532530851', 'Harry Potter e a criança amaldiçoada', 45.90, 100);
+    $livros = removerExemplar($livros, '978-8532530820');
+    $livros = adicionarExemplar($livros, '978-8532530844');
 
-    $livros = [
+
+
+///array
+$livros = [
         '978-8532530783' => [
             'nome' => 'Harry Potter e a pedra filosofal',
             'preco' => 32.30,
@@ -30,38 +37,8 @@ class CarrinhoDeCompras {
         'qtd_estoque' => 0
     ],
 ];
-*/
 
-
-    $livros = new Produto('978-8532530851', 'Harry Potter e a criança amaldiçoada', 45.90, 100);
     
-
-    $livros = adicionarTitulo($livros,'978-8532530851', 'Harry Potter e a criança amaldiçoada', 45.90, 100);
-    $livros = removerExemplar($livros, '978-8532530820');
-    $livros = adicionarExemplar($livros, '978-8532530844');
-
-/*
-
-    $produtos = array('Produto 1', 'Produto 2', 'Produto 3', 'Produto 4');
-    
-function inserirPedido($pedidos, $id, $cliente, $produtos)
-{
-    $pedido = new Pedido($id, $cliente, $produtos);
-    array_push($pedidos, $pedido);
-    return $pedidos;
-}
-
-/*
-$pedidos = array();
-$pedidos = inserirPedido($pedidos, 1, 'Cliente 1', $produtos);
-
-foreach ($pedidos as $pedido) {
-    echo "ID do Pedido: " . $pedido->getId() . "\n";
-    echo "Cliente: " . $pedido->getCliente() . "\n";
-    echo "Produtos: \n";
-   
-}/*
-*//*
     public function adicionarProduto($produto) {
         array_push($this->produtos, $produto);
     }
@@ -72,14 +49,19 @@ foreach ($pedidos as $pedido) {
         }
     }
 
+
     public function calcularDesconto() {
-        // Implemente a lógica para calcular o desconto aqui
+        try{
+        if ($desconto < 0 || $desconto > 100) {
+        throw new Exception('O desconto deve estar entre 0 e 100');
+           
+        $desconto = $this->preco * ($descontoPercentual / 100);
+        return $this->preco - $desconto;
+        }
+        }
     }
 
-    public function calcularFrete() {
-        // Implemente a lógica para calcular o frete aqui
-    }
-
+    
     public function calcularTotal() {
         // Implemente a lógica para calcular o total da compra aqui
     }
