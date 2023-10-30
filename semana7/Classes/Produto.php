@@ -67,8 +67,13 @@ public function repoe (int $qtd = 1)
 }
 }
 public function ValorTotalEstoque(): int {
-    return $this->qtd_estoque * $this-> preco;
+    if ($this->qtd_estoque < 0 || $this->preco < 0) {
+        throw new Exception('Os valores de qtd_estoque e preco não podem ser negativos');
+    }
+    
+    return $this->qtd_estoque * $this->preco;
 }
+
 
 }
 
