@@ -60,9 +60,5 @@ $livros = [
         }
         }
     }
-
+   
     
-    public function calcularTotal() {
-        // Implemente a lógica para calcular o total da compra aqui
-    }
-}*/
